@@ -31,6 +31,7 @@ import Sidebar from './Sidebar/index.vue'
 			<TagsView v-if="settings.showTagsView" />
 			<AppMain />
 		</div>
+		<theme-button>111</theme-button>
 	</div>
 </template>
 <!--原理vue2.0-->
@@ -42,7 +43,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { Sidebar, Navbar, AppMain, TagsView } from './components'
+import { Sidebar, Navbar, AppMain, TagsView, ThemeButton } from './components'
 import { computed } from 'vue'
 import { useAppStore } from '@/store/app'
 import ResizeHook from './hook/ResizeHandler'

@@ -1,12 +1,18 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div id="app">
-		<router-view></router-view>	
-  </div>
+	<div id="app">
+		<el-config-provider :locale="locale">
+			<router-view></router-view>
+		</el-config-provider>
+	</div>
 </template>
-
-<style scoped>
-</style>
+<script lang="ts" setup>
+import { ref, computed } from 'vue'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+import en from 'element-plus/dist/locale/en.mjs'
+import { useAppStore } from '@/store/app'
+const appStore = useAppStore()
+const locale = computed(() => (appStore.settings.elementlanguage === 'zh-cn' ? zhCn : en))
+// const toggle = () => {
+// 	language.value = language.value === 'zh-cn' ? 'en' : 'zh-cn'
+// }
+</script>

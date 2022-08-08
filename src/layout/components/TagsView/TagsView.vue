@@ -1,7 +1,7 @@
 <template>
 	<div id="tags-view-container" class="tags-view-container">
 		<div class="tags-view-wrapper">
-			<router-link
+			<!-- <router-link
 				v-for="tag in visitedViews"
 				ref="refTag"
 				:key="tag.path"
@@ -13,8 +13,27 @@
 			>
 				{{ tag.title }}
 				<Close v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)"></Close>
-			</router-link>
+			</router-link> -->
+			<el-tag
+				v-for="tag in visitedViews"
+				:key="tag.path"
+				:effect="isActive(tag) ? 'dark' : 'plain'"
+				closable
+				:type="tag.type"
+				@close="closeSelectedTag(tag)"
+			>
+				<router-link
+					:key="tag.path"
+					:to="{ path: tag.path, query: tag.query }"
+					class="tags-view-item"
+					@click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
+					@contextmenu.prevent="openMenu(tag, $event)"
+				>
+					{{ tag.title }}
+				</router-link>
+			</el-tag>
 		</div>
+
 		<ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
 			<li @click="refreshSelectedTag(selectedTag)">Refresh</li>
 			<li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">Close</li>
@@ -225,40 +244,50 @@ const { visible, top, left, selectedTag } = toRefs(state)
 	border-bottom: 1px solid var(--tags-view-border-bottom);
 	box-shadow: var(--tags-view-box-shadow);
 	.tags-view-wrapper {
-		.tags-view-item {
-			display: inline-block;
-			position: relative;
-			cursor: pointer;
-			height: 27px;
-			line-height: 26px;
-			border: 1px solid var(--tags-view-item-border-color);
-			color: var(--tags-view-item-color);
-			background: var(--tags-view-item-background);
-			padding: 0 8px;
-			font-size: 12px;
+		.el-tag {
+			margin-top: 4px;
 			margin-left: 5px;
-			margin-top: 3px;
-			&:first-of-type {
+			&:first-child {
 				margin-left: 10px;
 			}
-			&:last-of-type {
+			&:last-child {
 				margin-right: 15px;
 			}
-			&.active {
-				background-color: var(--tags-view-item-active-background);
-				color: var(--tags-view-item-active-color);
-				border-color: var(--tags-view-item-active-border-color);
-				&::before {
-					content: '';
-					background: var(--tags-view-background);
-					display: inline-block;
-					width: 8px;
-					height: 8px;
-					border-radius: 50%;
-					position: relative;
-					margin-right: 2px;
-				}
-			}
+		}
+		.tags-view-item {
+			// display: inline-block;
+			// position: relative;
+			// cursor: pointer;
+			// height: 27px;
+			// line-height: 26px;
+			// border: 1px solid var(--tags-view-item-border-color);
+			// color: var(--tags-view-item-color);
+			// background: var(--tags-view-item-background);
+			// padding: 0 8px;
+			// font-size: 12px;
+			// margin-left: 5px;
+			// margin-top: 3px;
+			// &:first-of-type {
+			// 	margin-left: 10px;
+			// }
+			// &:last-of-type {
+			// 	margin-right: 15px;
+			// }
+			// &.active {
+			// 	background-color: var(--tags-view-item-active-background);
+			// 	color: var(--tags-view-item-active-color);
+			// 	border-color: var(--tags-view-item-active-border-color);
+			// 	&::before {
+			// 		content: '';
+			// 		background: var(--tags-view-background);
+			// 		display: inline-block;
+			// 		width: 8px;
+			// 		height: 8px;
+			// 		border-radius: 50%;
+			// 		position: relative;
+			// 		margin-right: 2px;
+			// 	}
+			// }
 		}
 	}
 	.contextmenu {

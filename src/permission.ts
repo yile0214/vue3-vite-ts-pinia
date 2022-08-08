@@ -17,7 +17,7 @@ router.beforeEach(async (to: any, from, next: any) => {
 	document.title = getPageTitle(to.meta.title)
 	if (!settings.isNeedLogin) setToken(settings.tmpToken)
 	const hasToken: string | null = getToken()
-
+	console.log(hasToken, 'hasToken')
 	const userStore = useUserStore()
 	const permissionStore = usePermissionStore()
 	if (hasToken) {

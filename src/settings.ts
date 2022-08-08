@@ -16,7 +16,8 @@ interface SettingTy {
 	showNavbarTitle: boolean
 	showTopNavbar: boolean
 	mainNeedAnimation: boolean
-	viteBasePath: string
+	// viteBasePath: string
+	elementlanguage: string
 }
 
 const settings: SettingTy = {
@@ -107,7 +108,12 @@ const settings: SettingTy = {
 	 * vite.config.js base config
 	 * such as
 	 * */
-	viteBasePath: './'
+	// viteBasePath: './'
+	/*
+	 * vite.config.js base config
+	 * such as
+	 * */
+	elementlanguage: 'zh-cn'
 }
 
 export default settings

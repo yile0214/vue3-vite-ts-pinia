@@ -1,15 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { RouterTy } from '~/router'
 export const constantRoutes: RouterTy = [
-	// {
-	// 	path:"/",
-	// 	redirect:'/home',
-	// 	hidden:true
-	// },
-	// {
-	// 	path:"/home",
-	// 	component:()=>import('@/views/home/index.vue'),
-	// },
+	{
+		path: '/login2',
+		name: 'Login',
+		component: () => import('@/views/login/index.vue'),
+		meta: { title: '登录' },
+		hidden: true
+	},
 	{
 		path: '/',
 		name: 'Home',
