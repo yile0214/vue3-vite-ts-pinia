@@ -51,5 +51,6 @@ interface SettingTy {
 	showNavbarTitle: boolean
 	showTopNavbar: boolean
 	mainNeedAnimation: boolean
-	viteBasePath: string
+	// viteBasePath: string
+	elementlanguage: string
 }

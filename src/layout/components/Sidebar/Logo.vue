@@ -57,7 +57,8 @@ const { title, logo } = toRefs(state)
 		height: 100%;
 		width: 100%;
 		& .sidebar-logo {
-			color: var(--sidebar-logo-color);
+			// color: var(--sidebar-logo-color);
+			color: var(--el-color-primary);
 			width: var(--sidebar-logo-width);
 			height: var(--sidebar-logo-height);
 			vertical-align: middle;

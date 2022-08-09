@@ -15,6 +15,7 @@
 		"lib": ["ESNext", "DOM"],
 		"types": ["vite/client", "element-plus/global"], // 添加要包含的类型声明文件名列表，只有在这里列出的模块的声明文件才会被加载进来
 		"skipLibCheck": true, // 忽略所有的声明文件（ *.d.ts）的类型检查
+		"allowSyntheticDefaultImports": true,
 		"paths": {
 			// 模块名到基于 baseUrl的路径映射的列表
 			"@/*": ["src/*"],

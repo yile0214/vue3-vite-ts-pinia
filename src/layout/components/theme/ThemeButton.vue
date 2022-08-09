@@ -27,11 +27,11 @@ import { ref, reactive, onMounted } from 'vue'
 import { Setting } from '@element-plus/icons-vue'
 import { useAppStore } from '@/store/app'
 // ====================   主题色   ======================
-const predefineColors = ref(['#1890ff', '#f5222d', '#fa541c', '#faad14', '#13c2c2', '#52c41a', '#2f54eb', '#722ed1'])
-const openDrawer = ref(false)
+const predefineColors = ref<string[]>(['#1890ff', '#f5222d', '#fa541c', '#faad14', '#13c2c2', '#52c41a', '#2f54eb', '#722ed1'])
+const openDrawer = ref<boolean>(false)
 const defaultColor: string = localStorage.getItem('primaryColor') || '#1890ff'
 const systeamColor = ref<string>(defaultColor)
-const mix = (color1, color2, weight) => {
+const mix = (color1: string, color2: string, weight: number) => {
 	weight = Math.max(Math.min(Number(weight), 1), 0)
 	let r1 = parseInt(color1.substring(1, 3), 16)
 	let g1 = parseInt(color1.substring(3, 5), 16)
@@ -48,8 +48,6 @@ const mix = (color1, color2, weight) => {
 	return '#' + r + g + b
 }
 const colorChange = (color: string = defaultColor): void => {
-	// e就是选择了的颜色
-	console.log(localStorage.getItem('primaryColor'), 'sss')
 	const pre = '--el-color-primary'
 	// 白色混合色
 	const mixWhite = '#ffffff'

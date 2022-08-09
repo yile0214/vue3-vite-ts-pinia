@@ -19,10 +19,9 @@ const appStore = useAppStore()
 // const language = ref('zh-cn')
 // const locale = computed(() => (language.value === 'zh-cn' ? zhCn : en))
 const toggle = () => {
-	let value = appStore.settings.elementlanguage
-	value = value === 'zh-cn' ? 'en' : 'zh-cn'
+	const elementlanguage = appStore.settings.elementlanguage === 'zh-cn' ? 'en' : 'zh-cn'
 	appStore.M_settings({
-		elementlanguage: value
+		elementlanguage
 	})
 }
 </script>

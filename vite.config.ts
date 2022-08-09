@@ -43,10 +43,12 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@': pathResolve('./src'),
-			'~': pathResolve('./typings')
+			'~': pathResolve('./typings'),
+			path: 'path-browserify' // 解决ts中无法引入path问题
 		}
 	},
 	build: {
+		minify: 'terser',
 		outDir: 'dist', // 打包指定路径，默认项目根目录下的dist目录
 		terserOptions: {
 			compress: {

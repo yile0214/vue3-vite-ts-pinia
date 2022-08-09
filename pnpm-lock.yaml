@@ -14,6 +14,7 @@ specifiers:
   eslint-plugin-prettier: ^4.2.1
   eslint-plugin-vue: ^9.3.0
   nprogress: ^0.2.0
+  path-browserify: ^1.0.1
   path-to-regexp: ^6.2.1
   pinia: ^2.0.17
   postcss-html: ^1.5.0
@@ -36,6 +37,7 @@ dependencies:
   axios: 0.27.2
   element-plus: 2.2.12_vue@3.2.37
   nprogress: 0.2.0
+  path-browserify: 1.0.1
   path-to-regexp: 6.2.1
   pinia: 2.0.17_typescript@4.7.4+vue@3.2.37
   vue: 3.2.37
@@ -3084,6 +3086,10 @@ packages:
     resolution: {integrity: sha512-XHXfu/yOQRy9vYOtUDVMN60OEJjW013GoObG1o+xwQTpB9eYJX/BjXMsdW13ZDPruFhYYn0AG22w0xgQMwl3Nw==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /path-browserify/1.0.1:
+    resolution: {integrity: sha512-b7uo2UCUOYZcnF/3ID0lulOJi/bafxa1xPe7ZPsammBSpjSWQkjNxlt635YGS2MiR9GjvuXCtz2emr3jbsz98g==}
+    dev: false
 
   /path-exists/4.0.0:
     resolution: {integrity: sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==}

@@ -1,10 +1,9 @@
-export {}
 import { createApp } from 'vue'
-import './styles/index.scss'
 import App from './App.vue'
 import router from './router/index'
 import { createPinia } from 'pinia'
 import './permission'
+import './styles/index.scss'
 import 'element-plus/theme-chalk/el-message.css'
 import 'element-plus/theme-chalk/el-message-box.css'
 const app = createApp(App)

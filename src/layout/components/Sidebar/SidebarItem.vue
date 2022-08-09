@@ -29,7 +29,7 @@
 import Link from './Link.vue'
 import Item from './Item'
 import { isExternal } from '@/utils/validate'
-import { resolve } from 'path'
+import path from 'path'
 import { ref } from 'vue'
 import { RouteItemTy } from '~/router'
 const props = defineProps({
@@ -77,7 +77,6 @@ const resolvePath = (routePath: string) => {
 	if (isExternal(props.basePath)) {
 		return props.basePath
 	}
-	return props.basePath + routePath
-	// return resolve(props.basePath, routePath)
+	return path.resolve(props.basePath, routePath)
 }
 </script>

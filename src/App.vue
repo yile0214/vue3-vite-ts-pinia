@@ -6,13 +6,10 @@
 	</div>
 </template>
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import en from 'element-plus/dist/locale/en.mjs'
 import { useAppStore } from '@/store/app'
 const appStore = useAppStore()
 const locale = computed(() => (appStore.settings.elementlanguage === 'zh-cn' ? zhCn : en))
-// const toggle = () => {
-// 	language.value = language.value === 'zh-cn' ? 'en' : 'zh-cn'
-// }
 </script>
