@@ -6,7 +6,6 @@
 			:rules="rules"
 			label-width="120px"
 			class="demo-ruleForm"
-			:size="formSize"
 			status-icon
 		>
 			<el-form-item label="用户名" prop="name">
@@ -28,7 +27,6 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store/user'
 import { ElMessage } from 'element-plus'
 
-const formSize = ref('default')
 const ruleFormRef = ref()
 const ruleForm = reactive({
 	name: 'Hello',

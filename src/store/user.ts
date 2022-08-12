@@ -38,7 +38,7 @@ export const useUserStore = defineStore('user', {
 
 		login(data: ObjTy) {
 			return new Promise((resolve, reject) => {
-				resolve()
+				// resolve()
 				// loginReq(data)
 				//   .then((res: ObjTy) => {
 				//     if (res.code === 20000) {

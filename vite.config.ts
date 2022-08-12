@@ -48,7 +48,7 @@ export default defineConfig({
 		}
 	},
 	build: {
-		minify: 'terser',
+		// minify: 'terser',
 		outDir: 'dist', // 打包指定路径，默认项目根目录下的dist目录
 		terserOptions: {
 			compress: {
