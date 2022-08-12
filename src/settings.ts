@@ -111,10 +111,15 @@ const settings: SettingTy = {
 	 * */
 	// viteBasePath: './'
 	/*
-	 * vite.config.js base config
+	 * element language
 	 * such as
 	 * */
-	elementlanguage: 'zh-cn'
+	elementlanguage: 'zh-cn',
+	/*
+	 * layout
+	 * such as
+	 * */
+	layout: 'top_menu',
 }
 
 export default settings

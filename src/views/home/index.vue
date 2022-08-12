@@ -4,7 +4,7 @@
 	<el-button mb-2 @click="toggle">Switch Language</el-button>
 	<el-table mb-1 :data="[]" />
 	<el-pagination :total="100" />
-	<el-button type="primary">a</el-button>
+	<el-button type="primary">嗨</el-button>
 </template>
 <script lang="ts" setup>
 // import { getList } from '@/api/user'

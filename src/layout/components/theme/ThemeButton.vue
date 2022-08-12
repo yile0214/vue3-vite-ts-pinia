@@ -1,13 +1,37 @@
 <template>
 	<div class="rightDrawer">
-		<el-drawer v-model="openDrawer" size="20%" :with-header="false">
-			<div class="slot-body">
-				<div>主题色<el-color-picker v-model="systeamColor" :predefine="predefineColors" @change="colorChange" /></div>
-				<div>sidebarLogo<el-switch v-model="settings.sidebarLogo" @change="change('sidebarLogo')" /></div>
-				<div>showNavbarTitle<el-switch v-model="settings.showNavbarTitle" @change="change('showNavbarTitle')" /></div>
-				<div>showHamburger<el-switch v-model="settings.showHamburger" @change="change('showHamburger')" /></div>
-				<div>showTagsView<el-switch v-model="settings.showTagsView" @change="change('showTagsView')" /></div>
-			</div>
+		<el-drawer v-model="openDrawer" size="20%" title="系统配置">
+				<el-divider>主题色</el-divider>
+				<div class="theme_color">
+					<div v-for="color in predefineColors" :key="color" :style="{'backgroundColor':color}" class="color_block" @click="colorChange(color)">
+						<el-icon v-show="themeColor === color">
+							<Check />
+						</el-icon>
+					</div>
+					<el-color-picker v-model="systeamColor" :predefine="predefineColors" @change="colorChange" />
+				</div>
+				<el-divider>布局</el-divider>
+				<div class="menu">
+					<div class="left_menu" :class="settings.layout === 'left_menu'?'active':''" @click="changeMenu('left_menu')"></div>
+					<div class="top_menu" :class="settings.layout === 'top_menu'?'active':''" @click="changeMenu('top_menu')"></div>
+				</div>
+				<el-divider>其他配置</el-divider>
+				<div class="swicth_flex">
+					<span>sidebarLogo</span> 
+					<el-switch v-model="settings.sidebarLogo" active-text="on" inactive-text="off" inline-prompt @change="change('sidebarLogo')" />
+				</div>
+				<div class="swicth_flex">
+					<span>showNavbarTitle</span>
+					<el-switch v-model="settings.showNavbarTitle" active-text="on" inactive-text="off" inline-prompt @change="change('showNavbarTitle')" />
+				</div>
+				<div class="swicth_flex">
+					<span>showHamburger</span>
+					<el-switch v-model="settings.showHamburger" active-text="on" inactive-text="off" inline-prompt @change="change('showHamburger')" />
+				</div>
+				<div class="swicth_flex"> 
+					<span>showTagsView</span>
+					<el-switch v-model="settings.showTagsView" active-text="on" inactive-text="off" inline-prompt @change="change('showTagsView')" />
+				</div>
 		</el-drawer>
 		<div class="rightPanel">
 			<el-button
@@ -23,11 +47,12 @@
 	</div>
 </template>
 <script lang="ts" setup>
+import { Check } from '@element-plus/icons-vue'
 import { ref, reactive, onMounted } from 'vue'
 import { Setting } from '@element-plus/icons-vue'
 import { useAppStore } from '@/store/app'
 // ====================   主题色   ======================
-const predefineColors = ref<string[]>(['#1890ff', '#f5222d', '#fa541c', '#faad14', '#13c2c2', '#52c41a', '#2f54eb', '#722ed1'])
+const predefineColors = ref<string[]>(['#409eff', '#f5222d', '#fa541c', '#faad14', '#13c2c2', '#52c41a', '#2f54eb', '#722ed1'])
 const openDrawer = ref<boolean>(false)
 const defaultColor: string = localStorage.getItem('primaryColor') || '#1890ff'
 const systeamColor = ref<string>(defaultColor)
@@ -47,6 +72,8 @@ const mix = (color1: string, color2: string, weight: number) => {
 	b = ('0' + (b || 0).toString(16)).slice(-2)
 	return '#' + r + g + b
 }
+const themeColor = ref<string>('')
+themeColor.value = localStorage.getItem('primaryColor') || ''
 const colorChange = (color: string = defaultColor): void => {
 	const pre = '--el-color-primary'
 	// 白色混合色
@@ -55,6 +82,7 @@ const colorChange = (color: string = defaultColor): void => {
 	const mixBlack = '#000000'
 	const el = document.documentElement
 	localStorage.setItem('primaryColor', color)
+	themeColor.value = color
 	el.style.setProperty(pre, color)
 	// 这里是覆盖原有颜色的核心代码
 	for (let i = 1; i < 10; i += 1) {
@@ -73,7 +101,8 @@ const settings = reactive({
 	sidebarLogo: true,
 	showNavbarTitle: true,
 	showHamburger: true,
-	showTagsView: true
+	showTagsView: true,
+	layout:'',
 })
 Object.keys(settings).forEach(key => {
 	settings[key] = appStore.settings[key]
@@ -81,11 +110,85 @@ Object.keys(settings).forEach(key => {
 const change = (key: string): void => {
 	appStore.M_settings({ [key]: settings[key] })
 }
+const changeMenu = (value: string): void => {
+	settings['layout'] = value
+	appStore.M_settings({ layout: value })
+}
+
 </script>
 <style lang="scss" scoped>
 .rightDrawer {
-	.slot-body {
-		padding: 20px;
+	.theme_color{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.color_block{
+		width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #fff;
+	}
+	.menu{
+		display: flex;
+		justify-content: center;
+		div{
+			margin: 0 10px;
+			width: 56px;
+			height: 48px;
+			border-radius: 4px;
+			background-color: #f0f2f5;
+			overflow: hidden;
+			position: relative;
+			box-shadow: 0 1px 2.5px #0000002e;
+			cursor: pointer;
+			&:hover{
+				border: 2px solid #0960bd;
+			}
+		}
+		.active{
+			border: 2px solid #0960bd;
+		}
+		.left_menu{
+			&:before{
+				content:'';
+				display: block;
+				height: 100%;
+				width: 22%;
+				background-color: #273352;
+				position: absolute;
+				left: 0;
+			}
+			&:after{
+				content:'';
+				display: block;
+				height: 22%;
+				width: 78%;
+				background-color: #fff;
+				position: absolute;
+				right: 0;
+			}
+		}
+		.top_menu{
+			&:after{
+				content:'';
+				display: block;
+				height: 22%;
+				width: 100%;
+				background-color: #273352;
+				position: absolute;
+				right: 0;
+			}
+		}
+	}
+	.swicth_flex{
+		display: flex;
+		justify-content: space-between;
 	}
 }
 

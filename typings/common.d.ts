@@ -53,4 +53,5 @@ interface SettingTy {
 	mainNeedAnimation: boolean
 	// viteBasePath: string
 	elementlanguage: string
+	layout: string
 }

@@ -6,7 +6,8 @@
 		</div>
 		<!--nav title-->
 		<div v-if="settings.showNavbarTitle" class="heardCenterTitle">{{ settings.title }}</div>
-		<div v-if="settings.ShowDropDown" class="right-menu">
+		<HeaderAction />
+		<!-- <div v-if="settings.ShowDropDown" class="right-menu">
 			<el-dropdown trigger="click" size="medium">
 				<div class="avatar-wrapper">
 					<img src="https://github.jzfai.top/file/images/nav-right-logo.gif" class="user-avatar" />
@@ -20,25 +21,21 @@
 						<a target="_blank" href="https://github.com/yile0214/vue3-vite-ts-pinia">
 							<el-dropdown-item>Github</el-dropdown-item>
 						</a>
-						<!--<el-dropdown-item>修改密码</el-dropdown-item>-->
 						<el-dropdown-item divided @click="loginOut">login out</el-dropdown-item>
 					</el-dropdown-menu>
 				</template>
 			</el-dropdown>
-		</div>
+		</div> -->
 	</div>
 </template>
 
 <script setup lang="ts">
-import { CaretBottom } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
+import HeaderAction from './HeaderAction'
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
 
 import { useAppStore } from '@/store/app'
-import { useUserStore } from '@/store/user'
 
 const settings = computed(() => {
 	return appStore.settings
@@ -50,17 +47,6 @@ const appStore = useAppStore()
 const toggleSideBar = () => {
 	appStore.M_toggleSideBar()
 }
-/*
- * 退出登录
- * */
-const router = useRouter()
-const loginOut = () => {
-	const userStore = useUserStore()
-	userStore.logout().then(() => {
-		ElMessage({ message: '退出登录成功', type: 'success' })
-		router.push(`/login?redirect=/`)
-	})
-}
 </script>
 
 <style lang="scss" scoped>
@@ -71,29 +57,6 @@ const loginOut = () => {
 	background: var(--nav-bar-background);
 	box-shadow: var(--nav-bar-box-shadow);
 }
-
-//logo
-.avatar-wrapper {
-	margin-top: 5px;
-	position: relative;
-	cursor: pointer;
-
-	.user-avatar {
-		cursor: pointer;
-		width: 40px;
-		height: 40px;
-		border-radius: 10px;
-	}
-
-	.el-icon-caret-bottom {
-		cursor: pointer;
-		position: absolute;
-		right: -20px;
-		top: 25px;
-		font-size: 12px;
-	}
-}
-
 //center-title
 .heardCenterTitle {
 	text-align: center;
@@ -103,12 +66,5 @@ const loginOut = () => {
 	font-weight: 600;
 	font-size: 20px;
 	transform: translate(-50%, -50%);
-}
-
-//drop-down
-.right-menu {
-	cursor: pointer;
-	margin-right: 40px;
-	background-color: var(--nav-bar-right-menu-background);
 }
 </style>
