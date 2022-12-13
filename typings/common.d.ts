@@ -4,6 +4,7 @@ interface ObjTy {
 	[propName: string]: any
 }
 
+
 /*axiosReq请求配置*/
 import { AxiosRequestConfig } from 'axios'
 interface AxiosReqTy extends AxiosRequestConfig {

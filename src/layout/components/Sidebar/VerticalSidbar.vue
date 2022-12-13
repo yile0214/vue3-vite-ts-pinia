@@ -36,7 +36,7 @@ const router = useRouter()
 // const permissionStore = usePermissionStore()
 const routes = computed(() => {
 	// return permissionStore.routes
-	console.log(router.options)
+	// console.log(router.options)
 	return router.options.routes
 })
 const isCollapse = computed(() => {
@@ -55,6 +55,6 @@ const activeMenu = computed(() => {
 <style lang="scss">
 //fix open the item style issue
 .el-menu-vertical {
-	width: var(--side-bar-width);
+	width: 100%;
 }
 </style>

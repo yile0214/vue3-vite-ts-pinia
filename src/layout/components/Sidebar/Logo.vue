@@ -24,8 +24,8 @@ defineProps({
 	}
 })
 const state = reactive({
-	title: settings.title,
-	logo: 'https://github.jzfai.top/file/images/pd-logo.svg'
+	title: settings.title
+	// logo: 'https://github.jzfai.top/file/images/pd-logo.svg'
 })
 //export to page for
 const { title, logo } = toRefs(state)
@@ -47,11 +47,11 @@ const { title, logo } = toRefs(state)
 .sidebar-logo-container {
 	position: relative;
 	width: 100%;
-	height: 50px;
-	line-height: 50px;
+	height: var(--el-menu-item-height);
+	line-height: var(--el-menu-item-height);
 	background: var(--sidebar-logo-background);
 	padding-left: 14px;
-	text-align: left;
+	text-align: center;
 	overflow: hidden;
 	& .sidebar-logo-link {
 		height: 100%;
@@ -70,7 +70,7 @@ const { title, logo } = toRefs(state)
 			color: var(--sidebar-logo-title-color);
 			font-weight: 600;
 			line-height: 50px;
-			font-size: 14px;
+			font-size: 20px;
 			font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
 			vertical-align: middle;
 		}

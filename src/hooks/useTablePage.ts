@@ -1,10 +1,10 @@
 import { ref, onMounted } from 'vue'
 export default function (selectPageReq: any) {
 	/*分页*/
-	const pageNum = ref(1)
-	const pageSize = ref(10)
+	const page = ref(1)
+	const pageSize = ref(20)
 	const handleCurrentChange = (val: number) => {
-		pageNum.value = val
+		page.value = val
 		selectPageReq()
 	}
 	const handleSizeChange = (val: number) => {
@@ -13,7 +13,7 @@ export default function (selectPageReq: any) {
 	}
 	onMounted(() => {})
 	return {
-		pageNum,
+		page,
 		pageSize,
 		handleCurrentChange,
 		handleSizeChange

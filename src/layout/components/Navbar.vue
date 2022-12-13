@@ -56,6 +56,7 @@ const toggleSideBar = () => {
 	position: relative;
 	background: var(--nav-bar-background);
 	box-shadow: var(--nav-bar-box-shadow);
+	z-index: 1;
 }
 //center-title
 .heardCenterTitle {

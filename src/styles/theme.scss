@@ -1,9 +1,9 @@
 :root {
-	--el-menu-active-color: #409eff;
-	--el-menu-text-color: #bfcbd9 !important;
+	--el-menu-active-color: var(--el-color-primary);
+	--el-menu-text-color: #fff !important;
 	--el-menu-hover-text-color: var(--el-color-primary);
-	--el-menu-bg-color: #2b2f3a !important;
-	--el-menu-hover-bg-color: #263445 !important;
+	--el-menu-bg-color: var(--el-color-primary) !important;
+	--el-menu-hover-bg-color: #fff !important;
 	--el-menu-item-height: 48px !important;
 	--el-menu-border-color: none !important;
 
@@ -17,12 +17,12 @@
 	--hamburger-height: 20px;
 	//Sidebar
 	--sidebar-el-icon-size: 20px;
-	--sidebar-logo-background: #2b2f3a;
+	--sidebar-logo-background: var(--el-color-primary);
 	// --sidebar-logo-color: #ff9901;
 	--sidebar-logo-width: 32px;
 	--sidebar-logo-height: 32px;
 	--sidebar-logo-title-color: #fff;
-	--side-bar-width: 210px;
+	--side-bar-width: 230px;
 	--side-bar-border-right-color: '#ddd';
 	//AppMain.vue
 	--app-main-padding: 10px;

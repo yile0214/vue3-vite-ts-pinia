@@ -22,7 +22,7 @@ const toggleClick = () => {
 
 <style scoped lang="scss">
 .hamburger-style {
-	color: var(--hamburger-color);
+	color: var(--el-text-color-regular);
 	width: var(--hamburger-width);
 	height: var(--hamburger-height);
 	cursor: pointer;

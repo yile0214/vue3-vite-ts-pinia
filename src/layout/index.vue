@@ -28,7 +28,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { VerticalSidbar,HorizontalSidebar, Navbar, AppMain, TagsView, ThemeButton } from './components'
+import { VerticalSidbar, HorizontalSidebar, Navbar, AppMain, TagsView, ThemeButton } from './components'
 import { computed } from 'vue'
 import { useAppStore } from '@/store/app'
 import ResizeHook from './hook/ResizeHandler'
@@ -66,6 +66,7 @@ ResizeHook()
 	width: var(--side-bar-width) !important;
 	background-color: var(--el-menu-bg-color);
 	height: 100%;
+	padding: 0 10px;
 	position: fixed;
 	font-size: 0;
 	top: 0;
@@ -91,13 +92,12 @@ ResizeHook()
 	}
 }
 
-
 // 右侧菜单
 .sidebar-container-horizontal {
 	transition: width 0.28s;
 	width: 100%;
-	background-color: #2b2f3a;
-	height: 50px;
+	background-color: var(--el-menu-bg-color);
+	height: var(--el-menu-item-height);
 	position: fixed;
 	font-size: 0;
 	top: 0;
@@ -106,14 +106,13 @@ ResizeHook()
 	z-index: 1001;
 	overflow: hidden;
 	display: flex;
-	.sidebar-logo-container{
+	.sidebar-logo-container {
 		width: 210px !important;
 	}
 }
-.main-horizontal-container{
+.main-horizontal-container {
 	min-height: 100%;
 	position: relative;
-	border-left: 1px solid var(--layout-border-left-color);
 	height: calc(100% - 50px);
 	margin-top: 50px;
 }

@@ -1,5 +1,9 @@
 @import './theme.scss';
+@import './mixin.scss';
 @import './scss-suger.scss';
+@import './css-var.scss';
+@import './element.scss';
+
 body {
 	height: 100%;
 	-moz-osx-font-smoothing: grayscale;
@@ -59,4 +63,38 @@ div:focus {
 		clear: both;
 		height: 0;
 	}
+}
+// .app-container
+.container {
+	height: 100%;
+	overflow: auto;
+	padding: 20px;
+	box-shadow: 0px 0px 6px rgba(0, 12, 120, 0.15);
+}
+
+// 按钮组
+.btn_grounp {
+	padding: 10px 0;
+	// display: flex;
+	// .el-form {
+	// 	margin-right: 10px;
+	// }
+}
+
+// 表单form
+.form_block {
+	.el-input,
+	.el-select,
+	.el-cascader,
+	.el-input-number,
+	.el-date-editor--datetimerange {
+		width: 100% !important;
+	}
+}
+
+// 分页
+.pagination_block {
+	margin-top: 20px;
+	display: flex;
+	justify-content: flex-end;
 }

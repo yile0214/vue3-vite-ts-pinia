@@ -1,7 +1,7 @@
 <template>
 	<div id="Sidebar" class="reset-menu-style">
 		<!--logo-->
-		<div style="width: 210px;">
+		<div style="width: 210px">
 			<Logo v-if="settings.sidebarLogo" :collapse="!isCollapse" />
 		</div>
 		<!--router nav-->
@@ -16,7 +16,7 @@
 				<sidebar-item v-for="routeItem in routes" :key="routeItem.path" :item="routeItem" :base-path="routeItem.path" />
 			</el-menu>
 		</div>
-		<HeaderAction/>
+		<HeaderAction />
 	</div>
 </template>
 
@@ -24,7 +24,6 @@
 import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
 import HeaderAction from '../HeaderAction'
-
 import { useRoute, useRouter } from 'vue-router'
 import { computed } from 'vue'
 import { useAppStore } from '@/store/app'
@@ -57,10 +56,10 @@ const activeMenu = computed(() => {
 })
 </script>
 <style lang="scss" scoped>
-.horizontal_contain{
+.horizontal_contain {
 	// width: calc(100% - 280px);
 	flex: 1;
-	.el-menu-horizontal{
+	.el-menu-horizontal {
 		width: 100%;
 	}
 	--el-bg-color-overlay: none !important; // 隐藏横向菜单划过背景色

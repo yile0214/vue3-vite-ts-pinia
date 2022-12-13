@@ -22,7 +22,7 @@
 import { SettingTy } from '~/common'
 
 const settings: SettingTy = {
-	title: 'Vue3 Admin Ts',
+	title: 'VITE-TS-PINIA',
 	/**
 	 * @type {boolean} true | false
 	 * @description Whether show the logo in sidebar
@@ -79,7 +79,7 @@ const settings: SettingTy = {
 	 * @type {boolean} true | false
 	 * @description Whether need login
 	 */
-	isNeedLogin: false,
+	isNeedLogin: true,
 	/**
 	 * @type {string} 'roles' | 'code'
 	 */
@@ -119,7 +119,7 @@ const settings: SettingTy = {
 	 * layout
 	 * such as
 	 * */
-	layout: 'top_menu',
+	layout: 'left_menu'
 }
 
 export default settings

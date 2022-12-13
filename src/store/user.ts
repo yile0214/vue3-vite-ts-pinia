@@ -1,4 +1,4 @@
-// import { loginReq, logoutReq, getInfoReq } from '@/api/user'
+import { login, userInfo } from '@/api/user'
 import { setToken, removeToken } from '@/utils/auth'
 import { ObjTy } from '~/common'
 import router, { constantRoutes, asyncRoutes } from '@/router'
@@ -36,49 +36,30 @@ export const useUserStore = defineStore('user', {
 			})
 		},
 
-		login(data: ObjTy) {
-			return new Promise((resolve, reject) => {
-				// resolve()
-				// loginReq(data)
-				//   .then((res: ObjTy) => {
-				//     if (res.code === 20000) {
-				//       //commit('SET_Token', res.data?.jwtToken)
-				//       setToken(res.data?.jwtToken)
-				//       resolve(null)
-				//     } else {
-				//       reject(res)
-				//     }
-				//   })
-				//   .catch((error: any) => {
-				//     reject(error)
-				//   })
+		login(user: string, password: string) {
+			return new Promise<void>((resolve, reject) => {
+				login(user, password)
+					.then((res: ObjTy) => {
+						setToken(res?.userToken)
+						resolve()
+					})
+					.catch((error: any) => {
+						reject(error)
+					})
 			})
 		},
 		// get user info
 		getInfo() {
 			return new Promise((resolve, reject) => {
-				// getInfoReq()
-				//   .then((response: ObjTy) => {
-				//     const { data } = response
-				//     if (!data) {
-				//       return reject('Verification failed, please Login again.')
-				//     }
-				//     //此处模拟数据
-				//     const rolesArr: any = localStorage.getItem('roles')
-				//     if (rolesArr) {
-				//       data.roles = JSON.parse(rolesArr)
-				//     } else {
-				//       data.roles = ['admin']
-				//       localStorage.setItem('roles', JSON.stringify(data.roles))
-				//     }
-				//     const { roles, username } = data
-				//     this.M_username(username)
-				//     this.M_roles(roles)
-				//     resolve(data)
-				//   })
-				//   .catch((error: any) => {
-				//     reject(error)
-				//   })
+				userInfo()
+					.then((res: ObjTy) => {
+						this.M_username(res.name)
+						this.M_roles(res.roleIds)
+						resolve(res)
+					})
+					.catch((error: any) => {
+						reject(error)
+					})
 			})
 		},
 		// user logout

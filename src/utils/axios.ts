@@ -4,19 +4,17 @@ import { RequestConfig, RequestInterceptors } from '~/axios'
 import { getToken } from '@/utils/auth'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useUserStore } from '@/store/user'
-const userStore = useUserStore()
 class Request {
 	// axios实例
 	instance: AxiosInstance
-	constructor(config: RequestConfig) {
-		console.log(config, 'config')
+	constructor(config?: RequestConfig) {
 		this.instance = axios.create(config)
 		this.instance.interceptors.request.use(
 			(res: RequestConfig) => {
-				console.log('全局拦截器', res, 'resss')
-				// if (getToken()) {
-				// res.headers['Authorization'] = 'Token_13675661606_8cc6f021c8af4319b70e378098af6442'
-				// }
+				// console.log('全局拦截器', res, 'resss')
+				if (getToken()) {
+					res.headers['Authorization'] = getToken()
+				}
 				return res
 			},
 			(err: any) => {
@@ -26,9 +24,9 @@ class Request {
 		)
 		this.instance.interceptors.response.use(
 			(response: AxiosResponse) => {
-				console.log('响应拦截器')
+				// console.log('响应拦截器')
 				const res = response.data
-				console.log(res, '响应拦截器res')
+				// console.log(res, '响应拦截器res')
 				if (res.code !== 0) {
 					ElMessage({
 						message: res.result || 'Error',
@@ -42,6 +40,7 @@ class Request {
 							cancelButtonText: '取消',
 							type: 'warning'
 						}).then(() => {
+							const userStore = useUserStore()
 							userStore.resetState().then(() => {
 								location.reload()
 							})
@@ -54,6 +53,7 @@ class Request {
 			},
 			(err: any) => {
 				console.log(err, 'err')
+				return Promise.reject(err)
 			}
 		)
 	}
@@ -62,7 +62,7 @@ class Request {
 	}
 }
 export default Request
-export const resuest = new Request({
+export const request = new Request({
 	baseURL: import.meta.env.VITE_APP_BASE_URL,
 	timeout: 30000
 })

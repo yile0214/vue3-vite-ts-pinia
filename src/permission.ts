@@ -17,16 +17,15 @@ router.beforeEach(async (to: any, from, next: any) => {
 	document.title = getPageTitle(to.meta.title)
 	if (!settings.isNeedLogin) setToken(settings.tmpToken)
 	const hasToken: string | null = getToken()
-	console.log(hasToken, 'hasToken')
 	const userStore = useUserStore()
 	const permissionStore = usePermissionStore()
-	if (hasToken) {
+	if (222) {
 		if (to.path === '/login') {
 			// if is logged in, redirect to the home page
 			next({ path: '/' })
 		} else {
 			//judge isGetUserInfo
-			const isGetUserInfo: boolean = permissionStore.isGetUserInfo
+			const isGetUserInfo: boolean = permissionStore.isGetUserInfo || 'true'
 			if (isGetUserInfo) {
 				next()
 			} else {
@@ -37,7 +36,7 @@ router.beforeEach(async (to: any, from, next: any) => {
 						// note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
 
 						const { roles }: any = await userStore.getInfo()
-						accessRoutes = await permissionStore.generateRoutes(roles)
+						// accessRoutes = await permissionStore.generateRoutes(roles)
 					} else {
 						accessRoutes = asyncRoutes
 					}

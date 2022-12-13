@@ -1,37 +1,75 @@
 <template>
 	<div class="rightDrawer">
 		<el-drawer v-model="openDrawer" size="20%" title="系统配置">
-				<el-divider>主题色</el-divider>
-				<div class="theme_color">
-					<div v-for="color in predefineColors" :key="color" :style="{'backgroundColor':color}" class="color_block" @click="colorChange(color)">
-						<el-icon v-show="themeColor === color">
-							<Check />
-						</el-icon>
-					</div>
-					<el-color-picker v-model="systeamColor" :predefine="predefineColors" @change="colorChange" />
+			<el-divider>暗黑模式</el-divider>
+			<div class="swicth_flex flex-center">
+				<div class="dark" @click="changeDark">
+					<div class="dark_block" :class="{ active: darkActive }" />
+					<svg-icon icon-class="sun" />
+					<svg-icon icon-class="moon" />
 				</div>
-				<el-divider>布局</el-divider>
-				<div class="menu">
-					<div class="left_menu" :class="settings.layout === 'left_menu'?'active':''" @click="changeMenu('left_menu')"></div>
-					<div class="top_menu" :class="settings.layout === 'top_menu'?'active':''" @click="changeMenu('top_menu')"></div>
+			</div>
+			<el-divider>主题色</el-divider>
+			<div class="theme_color">
+				<div
+					v-for="color in predefineColors"
+					:key="color"
+					:style="{ backgroundColor: color }"
+					class="color_block"
+					@click="colorChange(color)"
+				>
+					<el-icon v-show="themeColor === color">
+						<Check />
+					</el-icon>
 				</div>
-				<el-divider>其他配置</el-divider>
-				<div class="swicth_flex">
-					<span>sidebarLogo</span> 
-					<el-switch v-model="settings.sidebarLogo" active-text="on" inactive-text="off" inline-prompt @change="change('sidebarLogo')" />
-				</div>
-				<div class="swicth_flex">
-					<span>showNavbarTitle</span>
-					<el-switch v-model="settings.showNavbarTitle" active-text="on" inactive-text="off" inline-prompt @change="change('showNavbarTitle')" />
-				</div>
-				<div class="swicth_flex">
-					<span>showHamburger</span>
-					<el-switch v-model="settings.showHamburger" active-text="on" inactive-text="off" inline-prompt @change="change('showHamburger')" />
-				</div>
-				<div class="swicth_flex"> 
-					<span>showTagsView</span>
-					<el-switch v-model="settings.showTagsView" active-text="on" inactive-text="off" inline-prompt @change="change('showTagsView')" />
-				</div>
+				<el-color-picker v-model="systeamColor" :predefine="predefineColors" @change="colorChange" />
+			</div>
+			<el-divider>布局</el-divider>
+			<div class="menu">
+				<div class="left_menu" :class="settings.layout === 'left_menu' ? 'active' : ''" @click="changeMenu('left_menu')"></div>
+				<div class="top_menu" :class="settings.layout === 'top_menu' ? 'active' : ''" @click="changeMenu('top_menu')"></div>
+			</div>
+			<el-divider>其他配置</el-divider>
+			<div class="swicth_flex">
+				<span>sidebarLogo</span>
+				<el-switch
+					v-model="settings.sidebarLogo"
+					active-text="on"
+					inactive-text="off"
+					inline-prompt
+					@change="change('sidebarLogo')"
+				/>
+			</div>
+			<div class="swicth_flex">
+				<span>showNavbarTitle</span>
+				<el-switch
+					v-model="settings.showNavbarTitle"
+					active-text="on"
+					inactive-text="off"
+					inline-prompt
+					@change="change('showNavbarTitle')"
+				/>
+			</div>
+			<div class="swicth_flex">
+				<span>showHamburger</span>
+				<el-switch
+					v-model="settings.showHamburger"
+					active-text="on"
+					inactive-text="off"
+					inline-prompt
+					@change="change('showHamburger')"
+				/>
+			</div>
+			<div class="swicth_flex">
+				<span>showTagsView</span>
+				<el-switch
+					v-model="settings.showTagsView"
+					active-text="on"
+					inactive-text="off"
+					inline-prompt
+					@change="change('showTagsView')"
+				/>
+			</div>
 		</el-drawer>
 		<div class="rightPanel">
 			<el-button
@@ -51,6 +89,22 @@ import { Check } from '@element-plus/icons-vue'
 import { ref, reactive, onMounted } from 'vue'
 import { Setting } from '@element-plus/icons-vue'
 import { useAppStore } from '@/store/app'
+// import { useDark, useToggle } from '@vueuse/core'
+let darkActive = ref(false)
+darkActive.value = !!localStorage.getItem('project_dark')
+const changeDark = () => {
+	let flag = !localStorage.getItem('project_dark')
+	if (flag) {
+		darkActive.value = true
+		document.getElementsByTagName('html')[0].className = 'dark'
+		localStorage.setItem('project_dark', 'dark')
+	} else {
+		darkActive.value = false
+		document.getElementsByTagName('html')[0].className = ''
+		localStorage.setItem('project_dark', '')
+	}
+	// useToggle(isDark)
+}
 // ====================   主题色   ======================
 const predefineColors = ref<string[]>(['#409eff', '#f5222d', '#fa541c', '#faad14', '#13c2c2', '#52c41a', '#2f54eb', '#722ed1'])
 const openDrawer = ref<boolean>(false)
@@ -94,6 +148,9 @@ const colorChange = (color: string = defaultColor): void => {
 }
 onMounted(() => {
 	colorChange()
+	if (localStorage.getItem('project_dark') === 'dark') {
+		document.getElementsByTagName('html')[0].className = 'dark'
+	}
 })
 // ====================   设置   ======================
 const appStore = useAppStore()
@@ -102,7 +159,7 @@ const settings = reactive({
 	showNavbarTitle: true,
 	showHamburger: true,
 	showTagsView: true,
-	layout:'',
+	layout: ''
 })
 Object.keys(settings).forEach(key => {
 	settings[key] = appStore.settings[key]
@@ -114,30 +171,56 @@ const changeMenu = (value: string): void => {
 	settings['layout'] = value
 	appStore.M_settings({ layout: value })
 }
-
 </script>
 <style lang="scss" scoped>
 .rightDrawer {
-	.theme_color{
+	.dark {
+		position: relative;
+		display: flex;
+		width: 50px;
+		height: 26px;
+		cursor: pointer;
+		background-color: #151515;
+		border-radius: 30px;
+		padding: 0 6px;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 14px;
+		border: 1px solid rgb(210, 207, 207);
+		.dark_block {
+			position: absolute;
+			width: 16px;
+			height: 16px;
+			border-radius: 50%;
+			background-color: #fff;
+			z-index: 1;
+			transition: all 0.25s cubic-bezier(0.7, 0.3, 0.1, 1);
+			left: 6px;
+		}
+		.active {
+			left: 28px;
+		}
+	}
+	.theme_color {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 	}
-	.color_block{
+	.color_block {
 		width: 20px;
-    height: 20px;
-    cursor: pointer;
-    border: 1px solid #ddd;
-    border-radius: 2px;
+		height: 20px;
+		cursor: pointer;
+		border: 1px solid #ddd;
+		border-radius: 2px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		color: #fff;
 	}
-	.menu{
+	.menu {
 		display: flex;
 		justify-content: center;
-		div{
+		div {
 			margin: 0 10px;
 			width: 56px;
 			height: 48px;
@@ -147,16 +230,16 @@ const changeMenu = (value: string): void => {
 			position: relative;
 			box-shadow: 0 1px 2.5px #0000002e;
 			cursor: pointer;
-			&:hover{
+			&:hover {
 				border: 2px solid #0960bd;
 			}
 		}
-		.active{
+		.active {
 			border: 2px solid #0960bd;
 		}
-		.left_menu{
-			&:before{
-				content:'';
+		.left_menu {
+			&:before {
+				content: '';
 				display: block;
 				height: 100%;
 				width: 22%;
@@ -164,8 +247,8 @@ const changeMenu = (value: string): void => {
 				position: absolute;
 				left: 0;
 			}
-			&:after{
-				content:'';
+			&:after {
+				content: '';
 				display: block;
 				height: 22%;
 				width: 78%;
@@ -174,9 +257,9 @@ const changeMenu = (value: string): void => {
 				right: 0;
 			}
 		}
-		.top_menu{
-			&:after{
-				content:'';
+		.top_menu {
+			&:after {
+				content: '';
 				display: block;
 				height: 22%;
 				width: 100%;
@@ -186,9 +269,12 @@ const changeMenu = (value: string): void => {
 			}
 		}
 	}
-	.swicth_flex{
+	.swicth_flex {
 		display: flex;
 		justify-content: space-between;
+	}
+	.flex-center {
+		justify-content: center;
 	}
 }
 
