@@ -16,14 +16,6 @@ export const constantRoutes: RouterTy = [
 		hidden: true
 	},
 	{
-		path: '/bMap',
-		component: () => import('@/views/svgMap/bMap.vue')
-	},
-	{
-		path: '/routeHistory',
-		component: () => import('@/views/routeHistory/index.vue')
-	},
-	{
 		path: '/provinceController',
 		component: Layout,
 		meta: { title: '省份管理', elSvgIcon: 'UserFilled' },
